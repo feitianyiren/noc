@@ -12,6 +12,7 @@ from itertools import groupby
 # NOC modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinventory import IGetInventory
+from noc.lib.validators import is_int
 
 
 class Script(BaseScript):
@@ -195,8 +196,6 @@ class Script(BaseScript):
                     t_num = s.split()[0].split("/")[-1]
                     t_vendor, t_sn, t_rev, pid = \
                         self.get_idprom(s.split()[0], s.split()[-1].upper())
-                    if not pid:
-                        continue
                     objects += [{
                         "type": "XCVR",
                         "number": t_num,
@@ -364,6 +363,8 @@ class Script(BaseScript):
                     pid = "CISCO7100"
             if (len(pid) - len(descr) == 2) and pid[len(descr)] == "-":
                 pid = descr
+            if is_int(name):  # Stacking
+                return "CHASSIS", int(name), pid
             return "CHASSIS", self.slot_id, pid
         elif ("SUP" in pid or "S2U" in pid) and "supervisor" in descr:
             # Sup2
