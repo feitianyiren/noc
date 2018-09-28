@@ -197,6 +197,7 @@ class Script(BaseScript):
                     t_vendor, t_sn, t_rev, pid = \
                         self.get_idprom(s.split()[0], s.split()[-1].upper())
                     if not pid:
+                        self.logger.debug("PID on Transiever: :%s is not set. Skipping...", s)
                         continue
                     objects += [{
                         "type": "XCVR",
