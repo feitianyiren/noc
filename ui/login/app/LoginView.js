@@ -72,7 +72,6 @@ Ext.define('NOC.LoginView', {
             xtype: 'button'
             , reference: 'okButton'
             , margin: '15 0 0 200'
-            , width: 50
             , formBind: true
             , handler: 'onLoginClick'
             , text: __('Login')
