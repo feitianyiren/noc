@@ -395,9 +395,12 @@
         <th class="col-sm-1/6">{{ _("MAC") }}</th>
         <th class="col-sm-2">{{ _("VLAN") }}</th>
         <th class="col-sm-2">{{ _("Profile") }}</th>
-        <th class="col-sm-1/12">{{ _("Errors") }}</th>
-        <th class="col-sm-1/6">{{ _("Status") }}</th>
-        <th class="col-sm-1/6">{{ _("Service") }}</th>
+        {% if i["service"] %}
+            <th class="col-sm-1/12">{{ _("Errors") }}</th>
+            <th class="col-sm-1/6">{{ _("Status") }}</th>
+            <th class="col-sm-1/6">{{ _("Service") }}</th>
+        {% endif %}
+        <th class="col-sm-1/12">{{ _("Description") }}</th>
     </thead>
     <tbody>
         {% for i in interfaces %}
@@ -475,8 +478,8 @@
                 </td>
                 {% else %}
                 <td></td>
-                <td><span class="small">{{ i["description"] }}</span></td>
                 {% endif %}
+                <td><span class="small">{{ i["description"] }}</span></td>
             <tr>
         {% endfor %}
     </tbody>
